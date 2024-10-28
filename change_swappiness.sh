@@ -14,6 +14,13 @@ if [[ "$yeni_swappiness" =~ ^[0-9]+$ ]] && [ "$yeni_swappiness" -ge 0 ] && [ "$y
 
     # Kalıcı hale getirmek için dosyaya yaz
     echo "vm.swappiness=$yeni_swappiness" | sudo tee -a /etc/sysctl.conf > /dev/null
+
+    # Swap alanını devre dışı bırakıp etkinleştirerek temizle
+    echo "Swap alanı boşaltılıyor..."
+    sudo swapoff -a
+    sudo swapon -a
+    echo "Swap alanı temizlendi ve yeniden etkinleştirildi."
+
 else
     echo "Lütfen 0 ile 100 arasında geçerli bir değer girin."
 fi
